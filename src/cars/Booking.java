@@ -1,4 +1,4 @@
-package car;
+package cars;
 
 public class Booking {
 
