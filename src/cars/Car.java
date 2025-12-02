@@ -27,9 +27,25 @@ public class Car {
 
 	// Needs to be completed
 	public boolean book(String firstName, String lastName, DateTime required, int numPassengers) {
+		
 		return false;
 	}
 
+	public boolean isCarAvailable() {
+		int counter = 0;
+		for(int i = 0; i < currentBookings.length; i++) {
+			if(currentBookings[i] != null) {
+				counter++;
+			}
+		}
+		if(counter >= 5) {
+			available = false;
+		}else {
+			available = true;
+		}
+		return available;
+	}
+	
 	// Human readable method
 	public String getDetails() {
 		StringBuilder sb = new StringBuilder();
