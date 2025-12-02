@@ -5,7 +5,7 @@ import utilities.*;
 public class Booking {
 	private String id;
 	private double bookingFee;
-	private DateTime pickupDateTime;
+	private DateTime pickUpDateTime;
 	private String firstName;
 	private String lastName;
 	private int numPassengers;
@@ -27,7 +27,7 @@ public class Booking {
 	// Validate the date and check if the date is within the range
 	public void setDate(DateTime date) {
 		if (DateUtilities.dateIsNotInPast(date) && DateUtilities.dateIsNotMoreThan7Days(date)) {
-			this.pickupDateTime = date;
+			this.pickUpDateTime = date;
 		}
 	}
 
@@ -72,6 +72,10 @@ public class Booking {
 	
 	public String getLastName() {
 		return lastName;
+	}
+	
+	public DateTime getBookingDate() {
+		return pickUpDateTime;
 	}
 
 }

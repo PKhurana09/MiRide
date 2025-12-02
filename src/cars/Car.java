@@ -13,8 +13,14 @@ public class Car {
 
 	// Booking Attributes
 	private boolean available;
+	private int bookingSpotAvailable = 0;
 	private Booking[] currentBookings;
 	private Booking[] pastBookings;
+
+	// Constants
+	private final double STANDARD_BOOKING_FEE = 1.50;
+	private final int MAXIMUM_PASSENGER_CAPACITY = 10;
+	private final int MINIMUM_PASSENGER_CAPACITY = 0;
 
 	public Car(String regNo, String make, String model, String driverName, int passengerCapacity) {
 		setRegNo(regNo); // This will validate and set the registration number from setter method.
@@ -27,25 +33,74 @@ public class Car {
 
 	// Needs to be completed
 	public boolean book(String firstName, String lastName, DateTime required, int numPassengers) {
-		
+
 		return false;
 	}
 
-	public boolean isCarAvailable() {
+	/*
+	 * This checks if the date is not in past and not in more than 7 days in future.
+	 */
+	public boolean isDateValid(DateTime required) {
+		return DateUtilities.dateIsNotInPast(required) && DateUtilities.dateIsNotMoreThan7Days(required);
+	}
+
+	/*
+	 * This checks if there is booking for today
+	 */
+	public boolean isBookingAvailableToday(DateTime required) {
+		boolean isAvailable = true;
+		for (int i = 0; i != currentBookings.length; i++) {
+			if (currentBookings[i] != null) {
+				if (DateUtilities.datesAreTheSame(required, currentBookings[i].getBookingDate())) {
+					isAvailable = false;
+				}
+			}
+		}
+		return isAvailable;
+	}
+
+	/*
+	 * To check if there is more then 5 bookings
+	 */
+	public boolean isThereMorethan5Bookings() {
 		int counter = 0;
-		for(int i = 0; i < currentBookings.length; i++) {
-			if(currentBookings[i] != null) {
+		for (int i = 0; i != currentBookings.length; i++) {
+			if (currentBookings[i] != null) {
 				counter++;
 			}
 		}
-		if(counter >= 5) {
-			available = false;
-		}else {
-			available = true;
+		if (counter >= 5) {
+			return true;
+		} else {
+			return false;
 		}
-		return available;
 	}
 	
+	/*
+	 *  Is number of passenger within the range of passenger capacity 
+	 */
+	public boolean validPassengerCapacity(int numPassengers) {
+		if(numPassengers > MINIMUM_PASSENGER_CAPACITY && numPassengers < MAXIMUM_PASSENGER_CAPACITY) {
+			return true;
+		}else {
+			return false;
+		}
+	}
+	
+    /*
+     * This sets the booking spot where the position is available. 
+     */	
+	public boolean bookingAvailable() {
+		boolean isAvailable = false;
+		for(int i = 0; i != currentBookings.length; i++) {
+			if(currentBookings[i] == null) {
+				isAvailable = true;
+				bookingSpotAvailable = i;
+			}
+		}
+		return isAvailable;
+	}
+
 	// Human readable method
 	public String getDetails() {
 		StringBuilder sb = new StringBuilder();
@@ -78,11 +133,6 @@ public class Car {
 		}
 
 		return sb.toString();
-	}
-
-	// Need to be implemented yet just left it for now
-	public boolean bookingAvailable() {
-		return true;
 	}
 
 	// Setter method for regNo
