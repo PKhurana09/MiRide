@@ -77,5 +77,9 @@ public class Booking {
 	public DateTime getBookingDate() {
 		return pickUpDateTime;
 	}
+	
+	public double getKilometersTravelled() {
+		return kilometersTravelled;
+	}
 
 }

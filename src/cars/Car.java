@@ -16,6 +16,7 @@ public class Car {
 	private int bookingSpotAvailable = 0;
 	private Booking[] currentBookings;
 	private Booking[] pastBookings;
+	private double tripFee;
 
 	// Constants
 	private final double STANDARD_BOOKING_FEE = 1.50;
@@ -33,8 +34,15 @@ public class Car {
 
 	// Needs to be completed
 	public boolean book(String firstName, String lastName, DateTime required, int numPassengers) {
-
-		return false;
+		boolean isBooked = false;
+		if(isDateValid(required) && isBookingAvailableToday(required) && isThereMorethan5Bookings() && validPassengerCapacity(numPassengers) && bookingAvailable()) {
+			tripFee = STANDARD_BOOKING_FEE;
+			Booking booking = new Booking(firstName, lastName, required, numPassengers, this);
+			currentBookings[bookingSpotAvailable] = booking;
+			bookingSpotAvailable++;
+			isBooked = true;
+		}
+		return isBooked;
 	}
 
 	/*
