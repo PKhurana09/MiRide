@@ -21,8 +21,28 @@ public class Booking {
 		this.car = car;
 		this.numPassengers = numPassengers;
 	}
-	
-	
+
+	// Need to complete this method with kilometers traveled somehow.
+	public String getDetails() {
+		StringBuilder sb = new StringBuilder();
+		sb.append(String.format("-15s %s\n", "id: ", id));
+		sb.append(String.format("-15s %s\n", "BookingFee: ", bookingFee));
+		sb.append(String.format("-15s %s\n", "Pick Up Date: ", pickUpDateTime));
+		sb.append(String.format("-15s %s%s\n", "Name: ", firstName, " ", lastName));
+		sb.append(String.format("-15s %s\n", "Passenger: ", numPassengers));
+		sb.append(String.format("-15s %s\n", "Travelled: ", kilometersTravelled));
+		sb.append(String.format("-15s %s\n", "Trip Fee: ", tripFee));
+		sb.append(String.format("-15s %s\n", "Car ID: ", car.getRegistrationNo()));
+		return sb.toString();
+	}
+
+	// Need to complete this method with kilometers traveled as well same as the above method 
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append(id + ":" + bookingFee + ":" + pickUpDateTime + ":" + firstName + " " + lastName + ":"
+				+ kilometersTravelled + ":" + tripFee + ":" + car.getRegistrationNo());
+		return sb.toString();
+	}
 
 	// Validate the date and check if the date is within the range
 	public void setDate(DateTime date) {
@@ -40,11 +60,11 @@ public class Booking {
 			this.firstName = "Error! First Name must have atleast 3 characters";
 		}
 	}
-	
+
 	public void setLastName(String lName) {
-		if(lName.length() >= 3) {
+		if (lName.length() >= 3) {
 			this.lastName = lName;
-		}else {
+		} else {
 			this.lastName = "Error! Last Name must have atleast 3 characters";
 		}
 	}
@@ -58,26 +78,28 @@ public class Booking {
 					+ "_" + date.getEightDigitDate();
 		}
 	}
-	
-	
-	
+
+	public void setBookingFee() {
+		bookingFee = 1.50;
+	}
+
 	// Getter method to getID
 	public String getId() {
 		return id;
 	}
-	
+
 	public String getFirstName() {
 		return firstName;
 	}
-	
+
 	public String getLastName() {
 		return lastName;
 	}
-	
+
 	public DateTime getBookingDate() {
 		return pickUpDateTime;
 	}
-	
+
 	public double getKilometersTravelled() {
 		return kilometersTravelled;
 	}
