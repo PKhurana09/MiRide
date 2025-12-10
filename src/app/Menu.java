@@ -1,6 +1,7 @@
 package app;
 
 import cars.Car;
+import utilities.MiRidesUtilities;
 import java.util.Scanner;
 
 public class Menu {
@@ -67,4 +68,61 @@ public class Menu {
 		System.out.println("Please enter your selection from above!");
 		System.out.println("To exit the menu please press enter!");
 	}
+	
+	
+	public void createCar() {
+		String id, make, model, driverName;
+		int capacity;
+		Scanner sc = new Scanner(System.in);
+		
+		// Getting details for the Car
+		// Registration number of the Car
+		System.out.println("Please enter the Registration Number of the car.");
+		id = sc.nextLine();
+		if(utilities.MiRidesUtilities.isRegNoValid(id).contains("Error")) {
+			System.out.println("There is an error please try again later.");
+		}
+		// Make of the Car
+		System.out.println("Please enter the Make of the car.");
+		make = sc.nextLine();
+		
+		// Model of the Car
+		System.out.println("Please enter the model of the car.");
+		model = sc.nextLine();
+		
+		// DriverName
+		System.out.println("Please enter the driver name.");
+		driverName = sc.nextLine();
+		
+		System.out.println("Please enter the passenger capacity");
+		capacity = sc.nextInt();
+		
+		if(utilities.MiRidesUtilities.isPassengerCapacityValid(capacity).contains("Error")) {
+			System.out.println("There is an error please try again later.");
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
